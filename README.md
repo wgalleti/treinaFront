@@ -15,3 +15,10 @@ Para validar esse conhecimento, irei disponibilizar um link de uma api de veícu
 > Link da api https://fipeapi.appspot.com/api/1/carros/marcas.json
 
 **Boa sorte!**
+
+
+## AAAAHHHHHH
+
+Quase esqueci, quando terminar, me mande o link do projeto que você irá colocar no gitub ^^
+
+Email: william.galleti@gmail.com
