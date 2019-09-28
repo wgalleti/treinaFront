@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Desafio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+  <style>
+    table {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <button id="botao-carregar">Carregar Dados</button>
+    <table class="bordered striped centered" id="tabela">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <tr>
+          <td>1</td>
+          <td>Audi</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Ferrari</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function renderHtml(item) {
+      const tabela = document.getElementById('tabela')
+      const numeroLinhas = tabela.rows.length
+      const linha = tabela.insertRow(numeroLinhas)
+      var celulaID = linha.insertCell(0)
+      var celulaNome = linha.insertCell(1)
+      celulaID.innerHTML = item.id
+      celulaNome.innerHTML = item.fipe_name
+    }
+
+    function renderHtmlDom(item) {
+      const tBody = document.getElementById('table-body')
+      const dTR = document.createElement('tr')
+      const dTDid = document.createElement('td')
+      const dTDnome = document.createElement('td')
+
+      dTDid.innerHTML = item.id
+      dTDnome.innerHTML = item.fipe_name
+      dTR.appendChild(dTDid)
+      dTR.appendChild(dTDnome)
+      tBody.appendChild(dTR)
+    }
+
+    async function start() {
+      const urlApi = 'https://fipeapi.appspot.com/api/1/carros/marcas.json'
+      const data = await fetch(urlApi).then(res => res.json())
+      const dBody = document.getElementById('table-body')
+      dBody.innerHTML = ''
+      data.forEach(item => renderHtmlDom(item))
+    }
+
+    const botao = document.getElementById('botao-carregar')
+    botao.addEventListener('click', function () {
+      start()
+    })
+  </script>
+</body>
+
+</html>

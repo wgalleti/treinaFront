@@ -26,6 +26,8 @@
         <header class="text-center">
           <h1>Tabelas API</h1>
         </header>
+        
+        <input type="text" placeholder="Classe do botão" v-model="classeBotao"/>
 
         <button class="btn btn-primary" @click="carregarApi">Carregar Dados</button>
 
@@ -54,12 +56,29 @@
     const app = new Vue({
       el: '#app',
       data: {
-        marcas: []
+        marcas: [],
+        classeBotao: 'primary'
+      },
+      computed: {
+        classFinal: {
+          get () {
+            return ''
+          },
+          set (value) {
+            
+          }
+        }
+        classFinal () {
+          return `btn btn-${app.classeBotao}`
+        }
       },
       methods: {
         async carregarApi () {
           app.marcas = await fetch(urlApi).then(res => res.json())
         }
+      },
+      mounted () {
+        console.log(this)
       }
     })
   </script>

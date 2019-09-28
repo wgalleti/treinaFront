@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Desafio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+  <style>
+    table {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" id="app">
+    <button @click="carregarDados">Carregar Dados</button>
+    <table class="bordered striped centered">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="marca in marcas">
+          <td>{{marca.id}}</td>
+          <td>{{marca.fipe_name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const urlApi = 'https://fipeapi.appspot.com/api/1/carros/marcas.json'
+    const app = new Vue({
+      el: '#app',
+      data: {
+        marcas: []
+      },
+      methods: {
+        async carregarDados() {
+          app.marcas = await fetch(urlApi).then(res => res.json())
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
