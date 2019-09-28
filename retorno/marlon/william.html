@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Demo Marlon</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    #tabela {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <header class="text-center">
+          <h1>Tabelas API</h1>
+        </header>
+
+        <button class="btn btn-primary" id="btn-carregar">Carregar Dados</button>
+
+        <table id="tabela" class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+            </tr>
+          </thead>
+          <tbody id="dados">
+            <tr>
+              <td>1</td>
+              <td>Audi</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Ferrari</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const urlApi = 'https://fipeapi.appspot.com/api/1/carros/marcas.json';
+
+    function renderHtml(item, domTBODY) {
+      const {
+        id,
+        fipe_name: nome
+      } = item
+      const domTR = document.createElement('tr')
+      const domTD1 = document.createElement('td')
+      const domTD2 = document.createElement('td')
+
+
+      domTD1.innerHTML = id
+      domTD2.innerHTML = nome
+
+      domTR.appendChild(domTD1)
+      domTR.appendChild(domTD2)
+      domTBODY.appendChild(domTR)
+    }
+
+    async function CarregarApi() {
+      const dados = await fetch(urlApi).then(response => response.json())
+      const domTBODY = document.getElementById('dados')
+      domTBODY.innerHTML = ''
+      dados.forEach(item => renderHtml(item, domTBODY))
+    }
+
+    function start() {
+      const botaoCarregar = document.getElementById('btn-carregar')
+      botaoCarregar.addEventListener('click', function () {
+        CarregarApi()
+      })
+    }
+
+    start()
+  </script>
+</body>
+
+</html>
