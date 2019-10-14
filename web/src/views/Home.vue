@@ -40,6 +40,19 @@
       </template>
     </b-table>
     <b-modal
+      id="apagar-form"
+      size="md"
+      title="Apagar pessoa"
+      hide-footer
+    >
+      <h5>Você tem certeza que deseja apagar esse registro?</h5>
+      <b-btn
+        variant="outline-success"
+        :disabled="loading"
+        @click="confirmaApagar"
+      >{{loading ? 'Apagando...' : 'Sim, Apaga ele!'}}</b-btn>
+    </b-modal>
+    <b-modal
       id="modal-form"
       size="xl"
       title="Formulário de Pessoa"
@@ -112,6 +125,7 @@ export default {
       form: {},
       loading: false,
       tableLoading: false,
+      formApagar: null,
       fields: [
         {
           key: 'id',
@@ -136,7 +150,18 @@ export default {
       this.form = item
     },
     apagar (item) {
-      console.log('apagou', item)
+      this.$root.$emit('bv::show::modal', 'apagar-form', '#btnShow')
+      this.formApagar = item
+    },
+    async confirmaApagar () {
+      try {
+        const { id } = this.formApagar
+        await this.axios.delete(`http://localhost:8000/api/pessoas/${id}/`)
+        this.$root.$emit('bv::hide::modal', 'apagar-form', '#btnShow')
+        this.carregar()
+      } catch (e) {
+        console.error(e)
+      }
     },
     async salvar () {
       this.loading = true
