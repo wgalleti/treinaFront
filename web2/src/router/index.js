@@ -9,6 +9,22 @@ export default new Router({
       path: '/',
       name: 'home',
       component: () => import('@/views/Home.vue')
+    },
+    {
+      path: '/pessoas',
+      name: 'pessoas',
+      component: () => import('@/views/Pessoas.vue')
+    },
+    {
+      path: '/livros',
+      name: 'livros',
+      component: () => import('@/views/Livros.vue')
+    },
+    {
+      path: '/emprestimos',
+      name: 'emprestimos',
+      component: () => import('@/views/Emprestimos.vue')
     }
+
   ]
 })
