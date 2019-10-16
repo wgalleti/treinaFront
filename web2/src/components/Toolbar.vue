@@ -1,6 +1,6 @@
 <template>
   <div class="toolbar">
-    <h1>Livro NERD</h1>
+    <span>Livro NERD</span>
     <div class="links">
       <router-link
         :to="link.to"
@@ -29,18 +29,23 @@ export default {
 <style lang="scss">
 .toolbar {
   position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  height: 70px;
+  height: 50px;
   background-color: #4caf50;
   padding: 10px 20px;
 
-  h1 {
+  span {
+    display: block;
+    font-size: 26px;
     color: #fff;
   }
 
   .links {
     height: 21px;
-    background-color: #fff;
+    background-color: #4caf50;
     margin: 0px -20px;
     padding: 0px 20px;
     display: flex;
@@ -49,7 +54,8 @@ export default {
     a {
       text-decoration: none;
       font-weight: 500;
-      color: #4caf50;
+      color: #fff;
+      padding-left: 10px;
     }
   }
 }
