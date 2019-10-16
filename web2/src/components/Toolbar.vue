@@ -31,16 +31,16 @@ export default {
   position: fixed;
   width: 100%;
   height: 70px;
-  background-color: #4464AD;
+  background-color: #4caf50;
   padding: 10px 20px;
 
   h1 {
-    color: #F58F29;
+    color: #fff;
   }
 
   .links {
     height: 21px;
-    background-color: #F58F29;
+    background-color: #fff;
     margin: 0px -20px;
     padding: 0px 20px;
     display: flex;
@@ -49,7 +49,7 @@ export default {
     a {
       text-decoration: none;
       font-weight: 500;
-      color: #4464AD;
+      color: #4caf50;
     }
   }
 }
